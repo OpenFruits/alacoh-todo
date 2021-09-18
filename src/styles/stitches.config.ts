@@ -2,11 +2,19 @@ import { createStitches } from "@stitches/react";
 import { colors } from "./colors";
 import { utils } from "./utils";
 
-export const { styled, css, globalCss, keyframes, getCssText, createTheme, theme } = createStitches({
+export const {
+  styled,
+  css,
+  globalCss,
+  keyframes,
+  getCssText,
+  createTheme,
+  theme,
+} = createStitches({
   utils,
   media: {
-    bp1: '(min-width: 480px)',
-    bp2: '(min-width: 800px)',
+    bp1: "(min-width: 480px)",
+    bp2: "(min-width: 800px)",
   },
   theme: {
     fontSizes: {
@@ -22,5 +30,5 @@ export const { styled, css, globalCss, keyframes, getCssText, createTheme, theme
 globalCss({
   html: { fontSize: "$4" },
   "@bp1": { html: { fontSize: "$4" } },
-  body: { lineHeight: 1.6, color: "$gray12", backgroundColor: "$gray2" },
+  body: { lineHeight: 1, color: "$gray12", backgroundColor: "$gray2" },
 })();

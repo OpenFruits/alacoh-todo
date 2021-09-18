@@ -1,4 +1,4 @@
-import type Stitches from '@stitches/react';
+import type Stitches from "@stitches/react";
 
 export const utils = {
   marginX: (value: Stitches.PropertyValue<`margin`>) => {

@@ -6,13 +6,12 @@ export const ThemeChamger: VFC = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => setIsMounted(true), [])
+  useEffect(() => setIsMounted(true), []);
 
   if (!isMounted) null;
 
   const oppositeColor = resolvedTheme === "dark" ? "light" : "dark";
   const handleClick = () => setTheme(oppositeColor);
-
 
   return (
     <Button onClick={handleClick}>
@@ -23,6 +22,6 @@ export const ThemeChamger: VFC = () => {
 
 const Button = styled("button", {
   fontSize: "2rem",
-  size: "80px",
-  cursor: "pointer"
-})
+  size: "60px",
+  cursor: "pointer",
+});

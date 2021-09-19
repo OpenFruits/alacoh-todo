@@ -1,54 +1,48 @@
 import type { NextPage } from "next";
-import { useCallback, useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/client";
 import { Layout } from "src/components/layout";
-import { styled } from "../styles/stitches.config";
-
-const Headline = styled("h2", {
-  color: "$teal11",
-});
+import { Avatar } from "src/components/shared/Avatar";
+import { Button } from "src/components/shared/Button";
+import { NewTodoForm } from "src/components/shared/NewTodoForm";
+import { TodoList } from "src/components/shared/TodoList";
+import { ThemeChamger } from "src/components/theme/ThemeChanger";
+import { styled } from "src/styles/stitches.config";
 
 const Home: NextPage = () => {
-  const [text, setText] = useState("");
-  const inputText = useCallback((e) => setText(e.target.value), [setText]);
-  console.log(text);
+  const [session, loading] = useSession();
 
-  const submit = () => {
-    setText("");
-  };
+  if (loading) return <Layout>スケルトンろーでぃんぐ！！</Layout>;
 
   return (
     <Layout>
-      <div>
-        <Headline>INPUT</Headline>
-        <input type="text" onChange={inputText} />
-        <button onChange={submit}>Add</button>
-      </div>
-      <div>
-        <Headline>TODAY&apos;S TODO</Headline>
-        <ol>
-          <li>task1</li>
-          <li>task2</li>
-          <li>task3</li>
-        </ol>
-      </div>
-      <div>
-        <Headline>NEXT DAY</Headline>
-        <ul>
-          <li>task1</li>
-          <li>task2</li>
-          <li>task3</li>
-        </ul>
-      </div>
-      <div>
-        <Headline>LATER</Headline>
-        <ul>
-          <li>foo</li>
-          <li>bar</li>
-          <li>baz</li>
-        </ul>
-      </div>
+      {!session && (
+        <div>
+          <p>サインインしてください</p>
+          <button onClick={() => signIn("line")}>Sign in</button>
+        </div>
+      )}
+      {session && (
+        <div>
+          <Header>
+            <Avatar
+              userName={session.user?.name as string}
+              avatarImage={session.user?.image as string}
+            />
+            <Button onClick={() => signOut()}>Sign Out</Button>
+            <ThemeChamger />
+          </Header>
+          <NewTodoForm />
+          <TodoList />
+        </div>
+      )}
     </Layout>
   );
 };
+
+const Header = styled("div", {
+  display: "flex",
+  gap: "2rem",
+  alignItems: "center",
+});
 
 export default Home;

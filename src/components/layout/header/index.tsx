@@ -10,18 +10,17 @@ export const Header: VFC = () => {
         <ThemeChamger />
       </div>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled("header", {
   display: "flex",
   justifyContent: "space-between",
-  gap: "2rem"
-})
+  gap: "2rem",
+});
 
 const H1 = styled("h1", {
-  fontSize: "2.5rem",
+  fontSize: "2rem",
   fontWeight: "bold",
-  margin: 0
-})
-
+  margin: 0,
+});

@@ -30,5 +30,13 @@ export const {
 globalCss({
   html: { fontSize: "$4" },
   "@bp1": { html: { fontSize: "$4" } },
-  body: { lineHeight: 1, color: "$gray12", backgroundColor: "$gray2" },
+  body: {
+    lineHeight: 1,
+    color: "$gray12",
+    backgroundColor: "$gray2",
+
+    li: {
+      listStyle: "none",
+    },
+  },
 })();

@@ -26,7 +26,7 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, {
 });
 
 const DialogContent = styled(DialogPrimitive.Content, {
-  backgroundColor: "white",
+  backgroundColor: "$gray2",
   borderRadius: 6,
   boxShadow:
     "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
@@ -69,11 +69,7 @@ const IconButton = styled("button", {
   cursor: "pointer",
 });
 
-type Props = {
-  task: Task;
-};
-
-export const EditModal: VFC<Props> = (props) => {
+export const EditModal: VFC<{ task: Task }> = (props) => {
   const queryClient = useQueryClient();
   const [todo, setTodo] = useState({
     id: props.task.id,

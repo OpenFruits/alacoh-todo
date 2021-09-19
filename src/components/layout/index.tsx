@@ -4,24 +4,20 @@ import { styled } from "src/styles/stitches.config";
 
 type Props = {
   children: React.ReactNode;
-}
+};
 
 export const Layout: VFC<Props> = (props) => {
   return (
     <Container>
-      <Header />
-      <Main>
-        {props.children}
-      </Main>
+      {/* <Header /> */}
+      <Main>{props.children}</Main>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled("div", {
-  display: "grid",
-  gap: "2rem",
-  paddingY: "2rem",
-  paddingLeft: "1.5rem",
+  paddingY: "0.5rem",
+  paddingLeft: "1rem",
   paddingRight: "1rem",
   marginX: "auto",
   maxWidth: "600px",

@@ -49,10 +49,13 @@ export const TodoList: VFC = () => {
       ) : (
         todaysTodo.map((todo) => (
           <TaskItem key={todo.id}>
-            <div>
-              <TaskName># {todo.title}</TaskName>
-              <TaskComment>💬 {todo.content}</TaskComment>
-            </div>
+            <TaskContent>
+              <TaskName>✅ {todo.title}</TaskName>
+              <TaskComment>
+                <p>💬</p>
+                <p>{todo.content}</p>
+              </TaskComment>
+            </TaskContent>
             <div>
               <Button onClick={() => deleteTodo(todo.id)}>Done</Button>
               <EditModal task={todo} />
@@ -67,10 +70,13 @@ export const TodoList: VFC = () => {
       ) : (
         nextTodo.map((todo) => (
           <TaskItem key={todo.id}>
-            <div>
-              <TaskName># {todo.title}</TaskName>
-              <TaskComment>💬 {todo.content}</TaskComment>
-            </div>
+            <TaskContent>
+              <TaskName>✅ {todo.title}</TaskName>
+              <TaskComment>
+                <p>💬</p>
+                <p>{todo.content}</p>
+              </TaskComment>
+            </TaskContent>
             <div>
               <Button onClick={() => deleteTodo(todo.id)}>Done</Button>
               <EditModal task={todo} />
@@ -85,10 +91,13 @@ export const TodoList: VFC = () => {
       ) : (
         laterTodo.map((todo) => (
           <TaskItem key={todo.id}>
-            <div>
-              <TaskName># {todo.title}</TaskName>
-              <TaskComment>💬 {todo.content}</TaskComment>
-            </div>
+            <TaskContent>
+              <TaskName>✅ {todo.title}</TaskName>
+              <TaskComment>
+                <p>💬</p>
+                <p>{todo.content}</p>
+              </TaskComment>
+            </TaskContent>
             <div>
               <Button onClick={() => deleteTodo(todo.id)}>Done</Button>
               <EditModal task={todo} />
@@ -112,10 +121,15 @@ const TaskItem = styled("div", {
   margin: "0.5rem 0",
   display: "flex",
   justifyContent: "space-between",
+  alignItems: "center",
 
   [`${Button}+${Button}`]: {
     marginLeft: "0.3rem",
   },
+});
+
+const TaskContent = styled("div", {
+  maxWidth: "75%",
 });
 
 const TaskName = styled("p", {
@@ -125,4 +139,10 @@ const TaskName = styled("p", {
 
 const TaskComment = styled("span", {
   fontSize: "0.8rem",
+  display: "flex",
+  gap: "0.2rem",
+
+  p: {
+    margin: 0,
+  },
 });

@@ -1,12 +1,16 @@
-import { useState, VFC, FormEvent } from "react";
+import { useState, VFC, FormEvent, useEffect } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { Button } from "src/components/shared/Button";
 import { styled } from "src/styles/stitches.config";
 
 export const NewTodoForm: VFC = () => {
   const queryClient = useQueryClient();
+  const [todoTitle, setTodoTitle] = useState({
+    tag: "✅",
+    name: "",
+  });
   const [todo, setTodo] = useState({
-    title: "",
+    title: `${todoTitle.tag} ${todoTitle.name}`,
     content: "",
     type: "TODAY",
   });
@@ -27,9 +31,15 @@ export const NewTodoForm: VFC = () => {
 
   const addTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setTodoTitle({ tag: "✅", name: "" });
     setTodo({ title: "", content: "", type: "TODAY" });
     mutate();
   };
+
+  useEffect(() => {
+    setTodo({ ...todo, title: `${todoTitle.tag} ${todoTitle.name}` });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [todoTitle]);
 
   const SetTypeButton: VFC<{ type: string }> = (props) => {
     return (
@@ -45,17 +55,35 @@ export const NewTodoForm: VFC = () => {
   return (
     <FormContainer onSubmit={addTodo}>
       <FormBlock>
-        <Label>todo name</Label>
-        <Input
-          type="text"
-          id="todo"
-          placeholder="go to XXX and buy XXX"
-          value={todo.title}
-          onChange={(e) => setTodo({ ...todo, title: e.target.value })}
-        />
+        <Label>New TODO</Label>
+        <Flex>
+          <SelectTag
+            name=""
+            id=""
+            value={todoTitle.tag}
+            onChange={(e) =>
+              setTodoTitle({ ...todoTitle, tag: e.target.value })
+            }
+          >
+            <option value="✅">✅</option>
+            <option value="🚀">🚀</option>
+            <option value="🛍">🛍</option>
+            <option value="🏥">🏥</option>
+          </SelectTag>
+          <Input
+            size="md"
+            type="text"
+            id="todo"
+            placeholder="go to XXX and buy XXX"
+            value={todoTitle.name}
+            onChange={(e) =>
+              setTodoTitle({ ...todoTitle, name: e.target.value })
+            }
+          />
+        </Flex>
       </FormBlock>
       <FormBlock>
-        <Label>comment</Label>
+        <Label>Comment</Label>
         <Input
           type="text"
           id="todo"
@@ -65,7 +93,7 @@ export const NewTodoForm: VFC = () => {
         />
       </FormBlock>
       <FormBlock>
-        <Label>type</Label>
+        <Label>Type</Label>
         <SetTypeButton type="TODAY" />
         <SetTypeButton type="NEXT" />
         <SetTypeButton type="LATER" />
@@ -83,18 +111,37 @@ const FormContainer = styled("form", {
   width: "320px",
 });
 
+const Flex = styled("div", {
+  display: "flex",
+});
+
 const Label = styled("p", {
-  margin: 0,
+  margin: "0.4rem 0 0.2rem",
   fontSize: "0.8rem",
   color: "$gray10",
 });
 
+const SelectTag = styled("select", {
+  border: "1px solid $gray8",
+  width: "40px",
+});
+
 const Input = styled("input", {
   width: "300px",
-  height: "1rem",
+  height: "1.2rem",
   padding: "0 4px",
-  resize: "none",
   border: "1px solid $gray8",
+
+  variants: {
+    size: {
+      md: {
+        width: "260px",
+      },
+      lg: {
+        width: "300px",
+      },
+    },
+  },
 });
 
 const SelectType = styled("button", {

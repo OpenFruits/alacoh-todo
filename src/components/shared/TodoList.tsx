@@ -28,7 +28,7 @@ export const TodoList: VFC = () => {
   );
 
   const deleteTodo = (todoId: number) => {
-    if (confirm("TODOを削除します。よろしいですか？")) {
+    if (confirm("完了したTODOを削除します。よろしいですか？")) {
       console.log("Delete");
       mutate(todoId);
     }
@@ -50,7 +50,7 @@ export const TodoList: VFC = () => {
         todaysTodo.map((todo) => (
           <TaskItem key={todo.id}>
             <TaskContent>
-              <TaskName>✅ {todo.title}</TaskName>
+              <TaskName>{todo.title}</TaskName>
               <TaskComment>
                 <p>💬</p>
                 <p>{todo.content}</p>
@@ -71,7 +71,7 @@ export const TodoList: VFC = () => {
         nextTodo.map((todo) => (
           <TaskItem key={todo.id}>
             <TaskContent>
-              <TaskName>✅ {todo.title}</TaskName>
+              <TaskName>{todo.title}</TaskName>
               <TaskComment>
                 <p>💬</p>
                 <p>{todo.content}</p>
@@ -92,7 +92,7 @@ export const TodoList: VFC = () => {
         laterTodo.map((todo) => (
           <TaskItem key={todo.id}>
             <TaskContent>
-              <TaskName>✅ {todo.title}</TaskName>
+              <TaskName>{todo.title}</TaskName>
               <TaskComment>
                 <p>💬</p>
                 <p>{todo.content}</p>
